@@ -14,7 +14,6 @@ bit12_freq = 0
 
 with open('input.txt') as file:
 	for line in file:
-		print(line)
 		bit1_freq = bit1_freq + 1 if line[0] == '1' else bit1_freq - 1
 		bit2_freq = bit2_freq + 1 if line[1] == '1' else bit2_freq - 1
 		bit3_freq = bit3_freq + 1 if line[2] == '1' else bit3_freq - 1
