@@ -20,15 +20,17 @@ def get_version_sum(packet, idx):
 			idx += 7 + 15
 			total_size = size + idx
 			while (idx < total_size):
-				packet_version_sum += get_version_sum(packet, idx)[0]
-				idx = get_version_sum(packet, idx)[1]
+				packet_version_num, new_idx = get_version_sum(packet, idx)
+				packet_version_sum += packet_version_num
+				idx = new_idx
 			return packet_version_sum, idx
 		else:
 			num_sub_packets = int(binary_corrector(packet[idx+7:idx+7+11]), 2)
 			idx += 7 + 11
 			for i in range(num_sub_packets):
-				packet_version_sum += get_version_sum(packet, idx)[0]
-				idx = get_version_sum(packet, idx)[1]
+				packet_version_num, new_idx = get_version_sum(packet, idx)
+				packet_version_sum += packet_version_num
+				idx = new_idx
 			return packet_version_sum, idx
 
 def hex_to_bin(hex_str):
@@ -67,6 +69,7 @@ def hex_to_bin(hex_str):
 		elif char == 'F':
 			bin_str += '1111'
 		else:
+			print('something bad')
 	return bin_str
 
 		
